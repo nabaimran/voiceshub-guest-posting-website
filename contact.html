@@ -1,118 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Contact — VoicesHub
-  </title>
-  <link href="style.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
- </head>
- <body>
+<head>
+  <title>Contact — VoicesHub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VoicesHub is a modern guest-posting platform for students, writers, and creators sharing ideas on AI, cybersecurity, student life, culture, careers, and digital growth." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
   <nav class="nav" id="mainNav">
-   <div class="nav__inner">
-    <a class="nav__logo" href="index.html">
-     <span>
-      V
-     </span>
-     oicesHub
-    </a>
-    <ul class="nav__links">
-     <li>
-      <a class="nav__link" href="index.html">
-       Home
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="articles.html">
-       Articles
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="authors.html">
-       Authors
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="write.html">
-       Write
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="dashboard.html">
-       Dashboard
-      </a>
-     </li>
-    </ul>
-    <button class="nav__burger" id="burgerBtn">
-     <span>
-     </span>
-     <span>
-     </span>
-     <span>
-     </span>
-    </button>
-   </div>
-   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">
-     Home
-    </a>
-    <a href="articles.html">
-     Articles
-    </a>
-    <a href="authors.html">
-     Authors
-    </a>
-    <a href="write.html">
-     Write
-    </a>
-    <a href="dashboard.html">
-     Dashboard
-    </a>
-   </div>
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html"><span>Voices</span>Hub</a>
+
+      <ul class="nav__links">
+        <li><a class="nav__link " href="index.html">Home</a></li>
+        <li><a class="nav__link " href="articles.html">Articles</a></li>
+        <li><a class="nav__link " href="authors.html">Writers</a></li>
+        <li><a class="nav__link " href="write.html">Write for Us</a></li>
+        <li><a class="nav__link " href="about.html">About</a></li>
+        <li><a class="nav__link nav__link--cta" href="dashboard.html">Dashboard</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+        <button class="nav__burger" id="burgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__mobile" id="mobileMenu">
+      <ul class="nav__mobile-links">
+        <li><a class="nav__mobile-link" href="index.html">Home</a></li>
+        <li><a class="nav__mobile-link" href="articles.html">Articles</a></li>
+        <li><a class="nav__mobile-link" href="authors.html">Writers</a></li>
+        <li><a class="nav__mobile-link" href="write.html">Write for Us</a></li>
+        <li><a class="nav__mobile-link" href="about.html">About</a></li>
+        <li><a class="nav__mobile-link nav__mobile-link--cta" href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </div>
   </nav>
-  <header class="page-hero">
-   <div>
-    <p class="eyebrow">
-     Contact
-    </p>
-    <h1>
-     Talk to the
-     <em>
-      editorial desk
-     </em>
-     .
-    </h1>
-    <p>
-     Questions, partnerships, writer support or feedback.
-    </p>
-   </div>
-  </header>
-  <main class="section">
-   <div class="container narrow">
-    <form class="form-card" id="contactForm">
-     <label>
-      Name
-      <input id="contactName" required=""/>
-     </label>
-     <label>
-      Email
-      <input id="contactEmail" required="" type="email"/>
-     </label>
-     <label>
-      Message
-      <textarea id="contactMessage" required="" rows="7"></textarea>
-     </label>
-     <button class="btn btn--primary">
-      Send Message
-     </button>
-     <p class="success-msg" id="contactMsg">
-     </p>
-    </form>
-   </div>
+
+  <main class="section contact-page">
+    <div class="container submit-layout">
+      <section class="form-card scroll-reveal">
+        <p class="section-eyebrow">Contact</p>
+        <h1>Editorial inquiries, partnerships, or questions.</h1>
+        <form id="contactForm" class="stacked-form">
+          <div class="form-row"><label>Name</label><input type="text" required /></div>
+          <div class="form-row"><label>Email</label><input type="email" required /></div>
+          <div class="form-row"><label>Message</label><textarea rows="8" required></textarea></div>
+          <button class="btn btn--primary" type="submit">Send Message</button>
+          <p class="form-message" id="contactMessage"></p>
+        </form>
+      </section>
+      <aside class="guidelines-card scroll-reveal">
+        <h2>Work with VoicesHub</h2>
+        <p>Reach out for contributor questions, sponsored posts, editorial partnerships, or collaboration ideas.</p>
+        <p><strong>Email:</strong> hello@voiceshub.example</p>
+      </aside>
+    </div>
   </main>
-  <script src="script.js">
-  </script>
- </body>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <a class="footer__logo" href="index.html"><span>Voices</span>Hub</a>
+        <p>A modern publishing space for writers, students, and creators with ideas worth sharing.</p>
+      </div>
+
+      <div>
+        <h3>Explore</h3>
+        <a href="articles.html">Articles</a>
+        <a href="authors.html">Writers</a>
+        <a href="write.html">Submit Article</a>
+        <a href="about.html">About</a>
+      </div>
+
+      <div>
+        <h3>Categories</h3>
+        <a href="articles.html?category=AI">Artificial Intelligence</a>
+        <a href="articles.html?category=Cybersecurity">Cybersecurity</a>
+        <a href="articles.html?category=Student Life">Student Life</a>
+        <a href="articles.html?category=Career">Career</a>
+      </div>
+
+      <div>
+        <h3>Newsletter</h3>
+        <form class="footer__form" id="newsletterForm">
+          <input id="newsletterEmail" type="email" placeholder="Your email" required />
+          <button type="submit">Join</button>
+        </form>
+        <p class="tiny" id="newsletterMsg"></p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2026 VoicesHub. Built by Naba Imran.</p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
 </html>

@@ -1,168 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Dashboard — VoicesHub
-  </title>
-  <link href="https://fonts.googleapis.com" rel="preconnect"/>
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet"/>
- </head>
- <body>
+<head>
+  <title>Dashboard — VoicesHub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VoicesHub is a modern guest-posting platform for students, writers, and creators sharing ideas on AI, cybersecurity, student life, culture, careers, and digital growth." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
   <nav class="nav" id="mainNav">
-   <div class="nav__inner">
-    <a class="nav__logo" href="index.html">
-     <span>
-      V
-     </span>
-     oicesHub
-    </a>
-    <ul class="nav__links">
-     <li>
-      <a class="nav__link" href="index.html">
-       Home
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="articles.html">
-       Articles
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="authors.html">
-       Authors
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="write.html">
-       Write
-      </a>
-     </li>
-     <li>
-      <a class="nav__link active" href="dashboard.html">
-       Dashboard
-      </a>
-     </li>
-     <li>
-      <button class="theme-toggle" id="themeToggle">
-       ☾
-      </button>
-     </li>
-    </ul>
-    <button class="nav__burger" id="burgerBtn">
-     <span>
-     </span>
-     <span>
-     </span>
-     <span>
-     </span>
-    </button>
-   </div>
-   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">
-     Home
-    </a>
-    <a href="articles.html">
-     Articles
-    </a>
-    <a href="authors.html">
-     Authors
-    </a>
-    <a href="write.html">
-     Write
-    </a>
-    <a href="dashboard.html">
-     Dashboard
-    </a>
-   </div>
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html"><span>Voices</span>Hub</a>
+
+      <ul class="nav__links">
+        <li><a class="nav__link " href="index.html">Home</a></li>
+        <li><a class="nav__link " href="articles.html">Articles</a></li>
+        <li><a class="nav__link " href="authors.html">Writers</a></li>
+        <li><a class="nav__link " href="write.html">Write for Us</a></li>
+        <li><a class="nav__link " href="about.html">About</a></li>
+        <li><a class="nav__link nav__link--cta" href="dashboard.html">Dashboard</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+        <button class="nav__burger" id="burgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__mobile" id="mobileMenu">
+      <ul class="nav__mobile-links">
+        <li><a class="nav__mobile-link" href="index.html">Home</a></li>
+        <li><a class="nav__mobile-link" href="articles.html">Articles</a></li>
+        <li><a class="nav__mobile-link" href="authors.html">Writers</a></li>
+        <li><a class="nav__mobile-link" href="write.html">Write for Us</a></li>
+        <li><a class="nav__mobile-link" href="about.html">About</a></li>
+        <li><a class="nav__mobile-link nav__mobile-link--cta" href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </div>
   </nav>
-  <header class="page-hero dashboard-hero">
-   <div>
-    <p class="eyebrow">
-     Admin dashboard
-    </p>
-    <h1>
-     Review, publish and
-     <em>
-      manage
-     </em>
-     .
-    </h1>
-    <p>
-     Frontend demo dashboard using localStorage. Password:
-     <strong>
-      admin123
-     </strong>
-    </p>
-   </div>
-  </header>
-  <main class="section">
-   <div class="container">
-    <div class="form-card small-card" id="loginBox">
-     <h2>
-      Admin login
-     </h2>
-     <input id="adminPassword" placeholder="Enter password" type="password"/>
-     <button class="btn btn--primary" id="adminLogin">
-      Login
-     </button>
-     <p id="loginMsg">
-     </p>
+
+  <main class="section dashboard-page">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Admin Review</p>
+        <h1 class="section-title">Submitted Articles Dashboard</h1>
+        <p class="section-subtitle">This demo dashboard uses localStorage. For a real platform, connect it to a backend database later.</p>
+      </div>
+
+      <section class="dashboard-login" id="dashboardLogin">
+        <div class="form-card form-card--small">
+          <h2>Admin Login</h2>
+          <p class="muted">Demo password: <strong>admin123</strong></p>
+          <input id="adminPassword" type="password" placeholder="Enter password" />
+          <button class="btn btn--primary" id="adminLoginBtn" type="button">Unlock Dashboard</button>
+          <p class="form-message" id="adminLoginMsg"></p>
+        </div>
+      </section>
+
+      <section class="dashboard-content" id="dashboardContent" hidden>
+        <div class="dashboard-stats">
+          <div><strong id="pendingCount">0</strong><span>Pending</span></div>
+          <div><strong id="approvedCount">0</strong><span>Approved</span></div>
+          <div><strong id="totalCount">0</strong><span>Total</span></div>
+        </div>
+        <div class="submission-list" id="submissionList"></div>
+      </section>
     </div>
-    <div class="hidden" id="adminPanel">
-     <div class="dashboard-stats">
-      <div>
-       <strong id="dashTotal">
-        0
-       </strong>
-       <span>
-        Total
-       </span>
-      </div>
-      <div>
-       <strong id="dashPending">
-        0
-       </strong>
-       <span>
-        Pending
-       </span>
-      </div>
-      <div>
-       <strong id="dashPublished">
-        0
-       </strong>
-       <span>
-        Published
-       </span>
-      </div>
-     </div>
-     <div class="tabs">
-      <button class="tab active" data-status="pending">
-       Pending
-      </button>
-      <button class="tab" data-status="published">
-       Published
-      </button>
-      <button class="tab" data-status="rejected">
-       Rejected
-      </button>
-     </div>
-     <div class="admin-list" id="adminPosts">
-     </div>
-    </div>
-   </div>
   </main>
+
   <footer class="footer">
-   <div class="container">
-    <p>
-     © VoicesHub.
-    </p>
-   </div>
+    <div class="container footer__grid">
+      <div>
+        <a class="footer__logo" href="index.html"><span>Voices</span>Hub</a>
+        <p>A modern publishing space for writers, students, and creators with ideas worth sharing.</p>
+      </div>
+
+      <div>
+        <h3>Explore</h3>
+        <a href="articles.html">Articles</a>
+        <a href="authors.html">Writers</a>
+        <a href="write.html">Submit Article</a>
+        <a href="about.html">About</a>
+      </div>
+
+      <div>
+        <h3>Categories</h3>
+        <a href="articles.html?category=AI">Artificial Intelligence</a>
+        <a href="articles.html?category=Cybersecurity">Cybersecurity</a>
+        <a href="articles.html?category=Student Life">Student Life</a>
+        <a href="articles.html?category=Career">Career</a>
+      </div>
+
+      <div>
+        <h3>Newsletter</h3>
+        <form class="footer__form" id="newsletterForm">
+          <input id="newsletterEmail" type="email" placeholder="Your email" required />
+          <button type="submit">Join</button>
+        </form>
+        <p class="tiny" id="newsletterMsg"></p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2026 VoicesHub. Built by Naba Imran.</p>
+    </div>
   </footer>
-  <script src="script.js">
-  </script>
- </body>
+  <script src="script.js"></script>
+</body>
 </html>

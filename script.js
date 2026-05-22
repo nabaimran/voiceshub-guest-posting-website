@@ -1,119 +1,390 @@
 'use strict';
 
-const seedPosts = [
-  {id:'ai-campus',title:'How AI Is Quietly Changing Student Life',category:'AI',author:'Naba Imran',email:'naba@example.com',bio:'Cybersecurity student and student media creator.',excerpt:'From study planning to research support, AI is becoming part of how students learn, revise and create.',content:'Artificial intelligence is no longer something students only read about in lecture slides. It is now part of daily academic life. Students use AI to brainstorm ideas, explain difficult topics, organise notes, and prepare for presentations. The real value is not replacing effort, but improving the way students think and learn. Used responsibly, AI can help students become more confident, curious and independent learners. The challenge is learning how to use it ethically, check its output, and still keep your own voice in the work.',image:'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&auto=format&fit=crop&q=85',date:'2026-05-20',status:'published',views:412},
-  {id:'cyber-everyday',title:'Cybersecurity Habits Every Student Should Know',category:'Cybersecurity',author:'Mariam Ali',email:'mariam@example.com',bio:'Digital safety writer and computing student.',excerpt:'Strong passwords, phishing awareness and privacy basics can protect your student life more than you think.',content:'Cybersecurity does not start with advanced hacking tools. It starts with everyday habits. Students should use unique passwords, enable multi-factor authentication, avoid suspicious links, and update their devices regularly. Public Wi-Fi should be used carefully, especially when logging into university portals or banking apps. Good security is not about fear. It is about being aware, prepared and consistent with small protective actions.',image:'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&auto=format&fit=crop&q=85',date:'2026-05-18',status:'published',views:366},
-  {id:'internship-confidence',title:'What My First Internship Taught Me About Confidence',category:'Careers',author:'Sara Khan',email:'sara@example.com',bio:'Student writer focused on careers and personal growth.',excerpt:'Internships are not just about experience. They teach you how to speak, solve and show up.',content:'A first internship can feel intimidating because you are suddenly expected to act professionally while still learning. The biggest lesson is that confidence grows through responsibility. You learn how to ask better questions, manage tasks, communicate clearly and recover from mistakes. Every small task becomes proof that you are capable of more than you thought.',image:'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&auto=format&fit=crop&q=85',date:'2026-05-15',status:'published',views:294},
-  {id:'digital-culture',title:'Why Digital Culture Shapes How We Think',category:'Culture',author:'Omar Hassan',email:'omar@example.com',bio:'Writer exploring internet culture and modern identity.',excerpt:'Memes, trends and social platforms are not just entertainment. They shape language, behaviour and identity.',content:'Digital culture moves fast, but its impact is deep. The way people speak, joke, learn and express opinions is shaped by online spaces. Trends can create community, but they can also create pressure. Understanding digital culture helps us become more intentional about what we consume, share and believe.',image:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&auto=format&fit=crop&q=85',date:'2026-05-12',status:'published',views:231}
-];
-
-const $ = s => document.querySelector(s);
-const $$ = s => document.querySelectorAll(s);
-
-function getPosts(){
-  const saved = localStorage.getItem('voiceshub_posts');
-  if(!saved){ localStorage.setItem('voiceshub_posts', JSON.stringify(seedPosts)); return seedPosts; }
-  return JSON.parse(saved);
-}
-function savePosts(posts){ localStorage.setItem('voiceshub_posts', JSON.stringify(posts)); }
-function slugify(text){ return text.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
-function readingTime(content){ return Math.max(1, Math.ceil((content||'').split(/\s+/).length / 200)); }
-function fmtDate(date){ return new Date(date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); }
-function esc(str=''){ return str.replace(/[&<>'"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
-
-function initNav(){
-  const nav = $('#mainNav'), burger = $('#burgerBtn'), menu = $('#mobileMenu');
-  window.addEventListener('scroll',()=>nav?.classList.toggle('nav--scrolled', scrollY>30),{passive:true});
-  burger?.addEventListener('click',()=>{menu.classList.toggle('is-open'); burger.setAttribute('aria-expanded', menu.classList.contains('is-open'));});
-  $('#themeToggle')?.addEventListener('click',()=>{document.body.classList.toggle('dark'); localStorage.setItem('voiceshub_theme', document.body.classList.contains('dark')?'dark':'light');});
-  if(localStorage.getItem('voiceshub_theme')==='dark') document.body.classList.add('dark');
-}
-function initReveal(){
-  const items = $$('.scroll-reveal');
-  if(!('IntersectionObserver' in window)){items.forEach(i=>i.classList.add('is-visible'));return;}
-  const io = new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target);}}),{threshold:.12});
-  items.forEach(i=>io.observe(i));
-}
-
-function card(post, large=false){
-  return `<article class="post-card ${large?'large':''} scroll-reveal">
-    <a href="article.html?id=${post.id}"><img src="${esc(post.image)}" alt="${esc(post.title)}"></a>
-    <div class="post-body"><span class="pill">${esc(post.category)}</span><h3><a href="article.html?id=${post.id}">${esc(post.title)}</a></h3>
-    <div class="meta"><span>By ${esc(post.author)}</span><span>${fmtDate(post.date)}</span><span>${readingTime(post.content)} min read</span><span>${post.views||0} views</span></div>
-    <p>${esc(post.excerpt)}</p></div></article>`;
-}
-function initHome(){
-  const wrap = $('#featuredPosts'); if(!wrap) return;
-  const posts = getPosts().filter(p=>p.status==='published').sort((a,b)=>(b.views||0)-(a.views||0));
-  $('#statPosts').textContent = posts.length;
-  $('#statAuthors').textContent = new Set(posts.map(p=>p.email)).size;
-  wrap.innerHTML = posts.length ? `${card(posts[0],true)}<div class="side-stack">${posts.slice(1,4).map(p=>card(p)).join('')}</div>` : '<p>No published posts yet.</p>';
-  initReveal();
-}
-function initArticles(){
-  const grid = $('#articlesGrid'); if(!grid) return;
-  const search = $('#articleSearch'), cat = $('#categoryFilter'), sort = $('#sortFilter'), empty = $('#emptyState');
-  const params = new URLSearchParams(location.search); if(params.get('category')) cat.value = params.get('category');
-  function render(){
-    let posts = getPosts().filter(p=>p.status==='published');
-    const q = search.value.toLowerCase();
-    if(q) posts = posts.filter(p=>(p.title+p.excerpt+p.content+p.author).toLowerCase().includes(q));
-    if(cat.value !== 'All') posts = posts.filter(p=>p.category===cat.value);
-    if(sort.value==='views') posts.sort((a,b)=>(b.views||0)-(a.views||0));
-    if(sort.value==='az') posts.sort((a,b)=>a.title.localeCompare(b.title));
-    if(sort.value==='newest') posts.sort((a,b)=>new Date(b.date)-new Date(a.date));
-    grid.innerHTML = posts.map(p=>card(p)).join(''); empty.style.display = posts.length ? 'none':'block'; initReveal();
+const demoArticles = {
+  'ai-students': {
+    title: 'How UAE Students Are Using AI to Study Smarter',
+    category: 'AI',
+    readTime: '5 min read',
+    author: 'Naba Imran',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1400&auto=format&fit=crop&q=80',
+    excerpt: 'AI is becoming part of everyday student life, from planning essays to supporting research and revision.',
+    body: `
+      <p>AI is no longer just a future concept discussed in lectures. For many students, it has become part of how they organise ideas, revise difficult topics, and build confidence with academic work.</p>
+      <h2>AI as a study partner</h2>
+      <p>Used properly, AI can help students break down complicated concepts, generate revision questions, plan outlines, and compare different perspectives. The value is not in copying answers, but in using tools to think more clearly.</p>
+      <h2>The responsible way to use it</h2>
+      <p>Students still need to fact-check, reference properly, and write in their own voice. The strongest students are not replacing effort with AI. They are using AI to improve structure, creativity, and understanding.</p>
+      <h2>What comes next</h2>
+      <p>As universities adapt, students who learn ethical and practical AI skills will have an advantage in both academic and professional settings.</p>
+    `
+  },
+  'cyber-uae': {
+    title: 'What It Is Really Like Studying Cybersecurity in the UAE',
+    category: 'Cybersecurity',
+    readTime: '6 min read',
+    author: 'Adam Yusuf',
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&auto=format&fit=crop&q=80',
+    excerpt: 'A student perspective on labs, pressure, curiosity, digital forensics, and finding your direction in tech.',
+    body: `
+      <p>Cybersecurity sounds glamorous from the outside, but studying it is a mix of logic, patience, mistakes, and constant learning.</p>
+      <h2>It is more practical than people expect</h2>
+      <p>Students work with networks, logs, vulnerabilities, reports, and forensic thinking. The real skill is not memorising everything. It is learning how to investigate carefully.</p>
+      <h2>The pressure is real</h2>
+      <p>Technology changes fast, so students often feel like they are behind. The solution is consistency: small labs, reading, documenting, and asking better questions.</p>
+    `
+  },
+  internship: {
+    title: 'The Internship Skills No One Talks About',
+    category: 'Career',
+    readTime: '5 min read',
+    author: 'Omar Khan',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&auto=format&fit=crop&q=80',
+    excerpt: 'Communication, ownership, patience, and problem-solving often matter more than just knowing the tools.',
+    body: `
+      <p>Internships are not only about technical skills. They are also about reliability, communication, and learning how real workplaces operate.</p>
+      <h2>Ownership matters</h2>
+      <p>People remember interns who follow up, take notes, ask useful questions, and complete tasks without needing to be chased.</p>
+      <h2>Soft skills become career skills</h2>
+      <p>Confidence, time management, and professional communication can completely change how your work is perceived.</p>
+    `
+  },
+  confidence: {
+    title: 'How to Build Confidence as a University Student',
+    category: 'Student Life',
+    readTime: '4 min read',
+    author: 'Maya Ali',
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&auto=format&fit=crop&q=80',
+    excerpt: 'Confidence is not always loud. Sometimes it starts with showing up, asking questions, and trying again.',
+    body: `
+      <p>Confidence in university grows through repetition. You build it by showing up even when you feel unsure.</p>
+      <h2>Start small</h2>
+      <p>Speak once in class, ask one question, join one activity, or complete one difficult task. Small wins create evidence that you are capable.</p>
+    `
+  },
+  'personal-brand': {
+    title: 'Why Everyone Wants a Personal Brand Now',
+    category: 'Digital Culture',
+    readTime: '4 min read',
+    author: 'Naba Imran',
+    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1400&auto=format&fit=crop&q=80',
+    excerpt: 'Online identity has become a portfolio, a network, and sometimes even a career opportunity.',
+    body: `
+      <p>A personal brand is not just about aesthetics. It is about what people associate with your name when they see your work.</p>
+      <h2>Your profile is a portfolio</h2>
+      <p>For students and young professionals, posting thoughtful work online can create opportunities before a formal job title does.</p>
+    `
+  },
+  happiness: {
+    title: 'The Science of Happiness for Busy Students',
+    category: 'Wellbeing',
+    readTime: '5 min read',
+    author: 'Maya Ali',
+    image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=1400&auto=format&fit=crop&q=80',
+    excerpt: 'Small routines, meaningful connections, and realistic expectations can change the way students experience university.',
+    body: `
+      <p>Happiness is not about being positive all the time. It is about building habits and environments that support your wellbeing.</p>
+      <h2>Connection matters</h2>
+      <p>Students often underestimate how much friendships, community, and feeling understood affect motivation and confidence.</p>
+    `
   }
-  [search,cat,sort].forEach(el=>el.addEventListener('input',render)); render();
-}
-function initSubmit(){
-  const form = $('#submitPostForm'); if(!form) return;
-  form.addEventListener('submit', e=>{
-    e.preventDefault();
-    const posts = getPosts();
-    const title = $('#postTitle').value.trim();
-    const post = {id: slugify(title)+'-'+Date.now().toString().slice(-4), title, category:$('#postCategory').value, author:$('#authorName').value.trim(), email:$('#authorEmail').value.trim(), bio:$('#authorBio').value.trim(), excerpt:$('#postExcerpt').value.trim(), content:$('#postContent').value.trim(), image:$('#postImage').value.trim() || 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&auto=format&fit=crop&q=85', date:new Date().toISOString().slice(0,10), status:'pending', views:0};
-    posts.unshift(post); savePosts(posts); form.reset(); $('#submitMsg').textContent = 'Submitted! Your article is now pending review in the dashboard.';
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  initNav();
+  initTheme();
+  initScrollReveal();
+  initArticleFilters();
+  initArticlePage();
+  initForms();
+  initDashboard();
+  initComments();
+});
+
+function initNav() {
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (!burgerBtn || !mobileMenu) return;
+
+  burgerBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('is-open');
+    burgerBtn.classList.toggle('is-open', open);
+    burgerBtn.setAttribute('aria-expanded', open.toString());
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  document.querySelectorAll('.nav__mobile-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('is-open');
+      burgerBtn.classList.remove('is-open');
+      document.body.style.overflow = '';
+    });
   });
 }
-function initAuthors(){
-  const grid = $('#authorsGrid'); if(!grid) return;
-  const posts = getPosts().filter(p=>p.status==='published');
-  const map = {};
-  posts.forEach(p=>{ if(!map[p.email]) map[p.email]={name:p.author,bio:p.bio,email:p.email,count:0,cats:new Set()}; map[p.email].count++; map[p.email].cats.add(p.category); });
-  grid.innerHTML = Object.values(map).map(a=>`<article class="author-card"><div class="avatar">${esc(a.name[0]||'A')}</div><h3>${esc(a.name)}</h3><p>${esc(a.bio)}</p><div class="meta"><span>${a.count} article${a.count>1?'s':''}</span><span>${[...a.cats].join(', ')}</span></div></article>`).join('') || '<p>No authors yet.</p>';
-}
-function initArticlePage(){
-  const root = $('#articlePage'); if(!root) return;
-  const id = new URLSearchParams(location.search).get('id');
-  const posts = getPosts(); const post = posts.find(p=>p.id===id && p.status==='published');
-  if(!post){root.innerHTML='<section class="section"><div class="container narrow"><h1>Article not found.</h1><a class="btn btn--primary" href="articles.html">Back to articles</a></div></section>';return;}
-  post.views = (post.views||0)+1; savePosts(posts);
-  root.innerHTML = `<article class="article-detail"><div class="container narrow"><span class="pill">${esc(post.category)}</span><h1>${esc(post.title)}</h1><div class="meta"><span>By ${esc(post.author)}</span><span>${fmtDate(post.date)}</span><span>${readingTime(post.content)} min read</span><span>${post.views} views</span></div></div><div class="container"><img class="article-cover" src="${esc(post.image)}" alt="${esc(post.title)}"></div><div class="article-content"><p>${esc(post.content).replace(/\n+/g,'</p><p>')}</p><div class="share-row"><button class="btn btn--outline" id="copyLink">Copy Link</button><a class="btn btn--primary" href="write.html">Write your own</a></div></div><section class="comments"><h2>Comments</h2><form id="commentForm" class="form-card"><input id="commentName" placeholder="Your name" required><textarea id="commentText" rows="4" placeholder="Add a comment" required></textarea><button class="btn btn--primary">Post Comment</button></form><div id="commentsList"></div></section></article>`;
-  $('#copyLink').addEventListener('click',()=>navigator.clipboard.writeText(location.href));
-  const key='comments_'+id; const list=()=>JSON.parse(localStorage.getItem(key)||'[]'); const save=x=>localStorage.setItem(key,JSON.stringify(x));
-  function renderComments(){ $('#commentsList').innerHTML = list().map(c=>`<div class="comment"><strong>${esc(c.name)}</strong><p>${esc(c.text)}</p></div>`).join(''); }
-  $('#commentForm').addEventListener('submit',e=>{e.preventDefault(); const cs=list(); cs.unshift({name:$('#commentName').value,text:$('#commentText').value}); save(cs); e.target.reset(); renderComments();}); renderComments();
-}
-function initDashboard(){
-  const login = $('#adminLogin'); if(!login) return;
-  const panel=$('#adminPanel'), box=$('#loginBox');
-  function open(){box.classList.add('hidden');panel.classList.remove('hidden');renderAdmin('pending');}
-  if(localStorage.getItem('voiceshub_admin')==='yes') open();
-  login.addEventListener('click',()=>{ if($('#adminPassword').value==='admin123'){localStorage.setItem('voiceshub_admin','yes');open();} else $('#loginMsg').textContent='Wrong password.';});
-  $$('.tab').forEach(t=>t.addEventListener('click',()=>{$$('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');renderAdmin(t.dataset.status);}));
-}
-function renderAdmin(status){
-  const posts=getPosts(), wrap=$('#adminPosts');
-  $('#dashTotal').textContent=posts.length; $('#dashPending').textContent=posts.filter(p=>p.status==='pending').length; $('#dashPublished').textContent=posts.filter(p=>p.status==='published').length;
-  const rows=posts.filter(p=>p.status===status);
-  wrap.innerHTML=rows.map(p=>`<div class="admin-item"><span class="pill">${esc(p.category)} • ${esc(p.status)}</span><h3>${esc(p.title)}</h3><p>${esc(p.excerpt)}</p><div class="meta"><span>${esc(p.author)}</span><span>${fmtDate(p.date)}</span></div><div class="admin-actions"><button class="btn ok" onclick="setStatus('${p.id}','published')">Publish</button><button class="btn warn" onclick="setStatus('${p.id}','pending')">Pending</button><button class="btn danger" onclick="setStatus('${p.id}','rejected')">Reject</button><button class="btn btn--outline" onclick="deletePost('${p.id}')">Delete</button></div></div>`).join('') || '<p class="empty-state" style="display:block">No posts here.</p>';
-}
-window.setStatus=(id,status)=>{const posts=getPosts(); const p=posts.find(x=>x.id===id); if(p)p.status=status; savePosts(posts); renderAdmin(status);};
-window.deletePost=(id)=>{if(!confirm('Delete this post?'))return; savePosts(getPosts().filter(p=>p.id!==id)); renderAdmin(document.querySelector('.tab.active').dataset.status);};
-function initNewsletter(){
-  $('#newsletterForm')?.addEventListener('submit',e=>{e.preventDefault(); $('#newsletterMsg').textContent='Subscribed successfully!'; e.target.reset();});
-  $('#contactForm')?.addEventListener('submit',e=>{e.preventDefault(); $('#contactMsg').textContent='Message saved locally. Connect a backend later to send emails.'; e.target.reset();});
+
+function initTheme() {
+  const toggle = document.getElementById('themeToggle');
+  const savedTheme = localStorage.getItem('voiceshub-theme');
+
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark');
+    if (toggle) toggle.textContent = '☀️';
+  }
+
+  if (!toggle) return;
+
+  toggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    localStorage.setItem('voiceshub-theme', isDark ? 'dark' : 'light');
+    toggle.textContent = isDark ? '☀️' : '🌙';
+  });
 }
 
-document.addEventListener('DOMContentLoaded',()=>{initNav();initReveal();initHome();initArticles();initSubmit();initAuthors();initArticlePage();initDashboard();initNewsletter();});
+function initScrollReveal() {
+  const items = document.querySelectorAll('.scroll-reveal');
+  if (!items.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    items.forEach((item) => item.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  items.forEach((item) => observer.observe(item));
+}
+
+function initArticleFilters() {
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.article-card');
+  const search = document.getElementById('articleSearch');
+  const noResults = document.getElementById('noResults');
+
+  if (!cards.length) return;
+
+  let activeFilter = new URLSearchParams(window.location.search).get('category') || 'all';
+
+  const applyFilters = () => {
+    const query = search ? search.value.toLowerCase().trim() : '';
+    let visibleCount = 0;
+
+    buttons.forEach((btn) => {
+      btn.classList.toggle('filter-btn--active', btn.dataset.filter === activeFilter);
+    });
+
+    cards.forEach((card) => {
+      const category = card.dataset.category || '';
+      const title = card.dataset.title.toLowerCase();
+      const matchesFilter = activeFilter === 'all' || category === activeFilter;
+      const matchesSearch = !query || title.includes(query) || category.toLowerCase().includes(query);
+      const visible = matchesFilter && matchesSearch;
+
+      card.classList.toggle('is-hidden', !visible);
+      if (visible) visibleCount += 1;
+    });
+
+    if (noResults) noResults.style.display = visibleCount ? 'none' : 'block';
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeFilter = btn.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  if (search) search.addEventListener('input', applyFilters);
+  applyFilters();
+}
+
+function initArticlePage() {
+  const title = document.getElementById('articleTitle');
+  if (!title) return;
+
+  const articleId = new URLSearchParams(window.location.search).get('id') || 'ai-students';
+  const article = demoArticles[articleId] || demoArticles['ai-students'];
+
+  document.title = `${article.title} — VoicesHub`;
+  document.getElementById('articleCategory').textContent = article.category;
+  document.getElementById('articleReadTime').textContent = article.readTime;
+  document.getElementById('articleTitle').textContent = article.title;
+  document.getElementById('articleExcerpt').textContent = article.excerpt;
+  document.getElementById('articleAuthor').textContent = article.author;
+  document.getElementById('articleImage').src = article.image;
+  document.getElementById('articleImage').alt = article.title;
+  document.getElementById('articleBody').innerHTML = article.body;
+}
+
+function initForms() {
+  const submitForm = document.getElementById('submitArticleForm');
+  const contactForm = document.getElementById('contactForm');
+  const newsletterForm = document.getElementById('newsletterForm');
+
+  if (submitForm) {
+    submitForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const submission = {
+        id: Date.now(),
+        name: document.getElementById('writerName').value.trim(),
+        email: document.getElementById('writerEmail').value.trim(),
+        bio: document.getElementById('writerBio').value.trim(),
+        title: document.getElementById('articleTitleInput').value.trim(),
+        category: document.getElementById('articleCategoryInput').value,
+        image: document.getElementById('articleImageInput').value.trim(),
+        content: document.getElementById('articleContentInput').value.trim(),
+        status: 'pending',
+        createdAt: new Date().toLocaleString()
+      };
+
+      const submissions = getSubmissions();
+      submissions.unshift(submission);
+      localStorage.setItem('voiceshub-submissions', JSON.stringify(submissions));
+
+      submitForm.reset();
+      document.getElementById('submitMessage').textContent = 'Your article has been submitted for review.';
+    });
+  }
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      contactForm.reset();
+      document.getElementById('contactMessage').textContent = 'Message sent. Thank you for reaching out.';
+    });
+  }
+
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      newsletterForm.reset();
+      const msg = document.getElementById('newsletterMsg');
+      if (msg) msg.textContent = 'You are on the list.';
+    });
+  }
+}
+
+function initDashboard() {
+  const loginBtn = document.getElementById('adminLoginBtn');
+  const dashboardContent = document.getElementById('dashboardContent');
+  const dashboardLogin = document.getElementById('dashboardLogin');
+
+  if (!loginBtn || !dashboardContent || !dashboardLogin) return;
+
+  loginBtn.addEventListener('click', () => {
+    const password = document.getElementById('adminPassword').value;
+    const message = document.getElementById('adminLoginMsg');
+
+    if (password !== 'admin123') {
+      message.textContent = 'Wrong password. Try admin123 for the demo.';
+      return;
+    }
+
+    dashboardLogin.hidden = true;
+    dashboardContent.hidden = false;
+    renderDashboard();
+  });
+}
+
+function renderDashboard() {
+  const list = document.getElementById('submissionList');
+  if (!list) return;
+
+  const submissions = getSubmissions();
+  const pending = submissions.filter((item) => item.status === 'pending').length;
+  const approved = submissions.filter((item) => item.status === 'approved').length;
+
+  document.getElementById('pendingCount').textContent = pending;
+  document.getElementById('approvedCount').textContent = approved;
+  document.getElementById('totalCount').textContent = submissions.length;
+
+  if (!submissions.length) {
+    list.innerHTML = '<p class="muted">No submissions yet. Try submitting an article from the Write for Us page.</p>';
+    return;
+  }
+
+  list.innerHTML = submissions.map((item) => `
+    <article class="submission-card">
+      <div class="article-meta"><span>${escapeHTML(item.category)}</span><span>${escapeHTML(item.status)}</span><span>${escapeHTML(item.createdAt)}</span></div>
+      <h3>${escapeHTML(item.title)}</h3>
+      <p><strong>${escapeHTML(item.name)}</strong> — ${escapeHTML(item.email)}</p>
+      <p>${escapeHTML(item.content).slice(0, 220)}...</p>
+      <div class="submission-actions">
+        <button class="mini-btn mini-btn--approve" onclick="updateSubmission(${item.id}, 'approved')">Approve</button>
+        <button class="mini-btn" onclick="updateSubmission(${item.id}, 'pending')">Mark Pending</button>
+        <button class="mini-btn mini-btn--delete" onclick="deleteSubmission(${item.id})">Delete</button>
+      </div>
+    </article>
+  `).join('');
+}
+
+function updateSubmission(id, status) {
+  const submissions = getSubmissions().map((item) => (
+    item.id === id ? { ...item, status } : item
+  ));
+
+  localStorage.setItem('voiceshub-submissions', JSON.stringify(submissions));
+  renderDashboard();
+}
+
+function deleteSubmission(id) {
+  const submissions = getSubmissions().filter((item) => item.id !== id);
+  localStorage.setItem('voiceshub-submissions', JSON.stringify(submissions));
+  renderDashboard();
+}
+
+function getSubmissions() {
+  return JSON.parse(localStorage.getItem('voiceshub-submissions') || '[]');
+}
+
+function initComments() {
+  const form = document.getElementById('commentForm');
+  const list = document.getElementById('commentList');
+  if (!form || !list) return;
+
+  const articleId = new URLSearchParams(window.location.search).get('id') || 'ai-students';
+  const key = `voiceshub-comments-${articleId}`;
+
+  const render = () => {
+    const comments = JSON.parse(localStorage.getItem(key) || '[]');
+    list.innerHTML = comments.map((comment) => `
+      <div class="comment-item">
+        <strong>${escapeHTML(comment.name)}</strong>
+        <p>${escapeHTML(comment.text)}</p>
+      </div>
+    `).join('');
+  };
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const comments = JSON.parse(localStorage.getItem(key) || '[]');
+    comments.unshift({
+      name: document.getElementById('commentName').value.trim(),
+      text: document.getElementById('commentText').value.trim()
+    });
+
+    localStorage.setItem(key, JSON.stringify(comments));
+    form.reset();
+    render();
+  });
+
+  render();
+}
+
+function escapeHTML(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}

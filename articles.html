@@ -1,157 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Articles — VoicesHub
-  </title>
-  <link href="https://fonts.googleapis.com" rel="preconnect"/>
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet"/>
- </head>
- <body>
+<head>
+  <title>Articles — VoicesHub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VoicesHub is a modern guest-posting platform for students, writers, and creators sharing ideas on AI, cybersecurity, student life, culture, careers, and digital growth." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
   <nav class="nav" id="mainNav">
-   <div class="nav__inner">
-    <a class="nav__logo" href="index.html">
-     <span>
-      V
-     </span>
-     oicesHub
-    </a>
-    <ul class="nav__links">
-     <li>
-      <a class="nav__link" href="index.html">
-       Home
-      </a>
-     </li>
-     <li>
-      <a class="nav__link active" href="articles.html">
-       Articles
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="authors.html">
-       Authors
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="write.html">
-       Write
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="dashboard.html">
-       Dashboard
-      </a>
-     </li>
-     <li>
-      <button class="theme-toggle" id="themeToggle">
-       ☾
-      </button>
-     </li>
-    </ul>
-    <button class="nav__burger" id="burgerBtn">
-     <span>
-     </span>
-     <span>
-     </span>
-     <span>
-     </span>
-    </button>
-   </div>
-   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">
-     Home
-    </a>
-    <a href="articles.html">
-     Articles
-    </a>
-    <a href="authors.html">
-     Authors
-    </a>
-    <a href="write.html">
-     Write
-    </a>
-    <a href="dashboard.html">
-     Dashboard
-    </a>
-   </div>
-  </nav>
-  <header class="page-hero article-hero">
-   <div>
-    <p class="eyebrow">
-     Article library
-    </p>
-    <h1>
-     Read what the community is
-     <em>
-      thinking
-     </em>
-     .
-    </h1>
-    <p>
-     Search, filter and discover stories across technology, AI, cybersecurity, student life and more.
-    </p>
-   </div>
-  </header>
-  <section class="filter-bar">
-   <div class="container filter-wrap">
-    <input id="articleSearch" placeholder="Search articles..." type="search"/>
-    <select id="categoryFilter">
-     <option value="All">
-      All categories
-     </option>
-     <option>
-      Technology
-     </option>
-     <option>
-      AI
-     </option>
-     <option>
-      Cybersecurity
-     </option>
-     <option>
-      Student Life
-     </option>
-     <option>
-      Careers
-     </option>
-     <option>
-      Culture
-     </option>
-    </select>
-    <select id="sortFilter">
-     <option value="newest">
-      Newest first
-     </option>
-     <option value="views">
-      Most viewed
-     </option>
-     <option value="az">
-      A-Z
-     </option>
-    </select>
-   </div>
-  </section>
-  <main class="section">
-   <div class="container">
-    <div class="articles-grid" id="articlesGrid">
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html"><span>Voices</span>Hub</a>
+
+      <ul class="nav__links">
+        <li><a class="nav__link " href="index.html">Home</a></li>
+        <li><a class="nav__link nav__link--active" href="articles.html">Articles</a></li>
+        <li><a class="nav__link " href="authors.html">Writers</a></li>
+        <li><a class="nav__link " href="write.html">Write for Us</a></li>
+        <li><a class="nav__link " href="about.html">About</a></li>
+        <li><a class="nav__link nav__link--cta" href="dashboard.html">Dashboard</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+        <button class="nav__burger" id="burgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+        </button>
+      </div>
     </div>
-    <p class="empty-state" id="emptyState">
-     No articles found.
-    </p>
-   </div>
+
+    <div class="nav__mobile" id="mobileMenu">
+      <ul class="nav__mobile-links">
+        <li><a class="nav__mobile-link" href="index.html">Home</a></li>
+        <li><a class="nav__mobile-link" href="articles.html">Articles</a></li>
+        <li><a class="nav__mobile-link" href="authors.html">Writers</a></li>
+        <li><a class="nav__mobile-link" href="write.html">Write for Us</a></li>
+        <li><a class="nav__mobile-link" href="about.html">About</a></li>
+        <li><a class="nav__mobile-link nav__mobile-link--cta" href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-hero page-hero--articles">
+    <div class="page-hero__overlay"></div>
+    <div class="container page-hero__content">
+      <p class="hero__eyebrow reveal-text">Explore the archive</p>
+      <h1 class="page-hero__title reveal-text delay-1">Articles built for curious readers.</h1>
+      <p class="page-hero__sub reveal-text delay-2">Search, filter, and discover stories from the VoicesHub community.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="filter-section">
+      <div class="container filter-layout">
+        <input class="search-input" id="articleSearch" type="search" placeholder="Search articles..." />
+        <div class="filter-buttons" id="filterButtons">
+          <button class="filter-btn filter-btn--active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="AI">AI</button>
+          <button class="filter-btn" data-filter="Cybersecurity">Cybersecurity</button>
+          <button class="filter-btn" data-filter="Student Life">Student Life</button>
+          <button class="filter-btn" data-filter="Career">Career</button>
+          <button class="filter-btn" data-filter="Digital Culture">Digital Culture</button>
+          <button class="filter-btn" data-filter="Wellbeing">Wellbeing</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="article-grid" id="articleGrid">
+          <article class="article-card scroll-reveal" data-category="AI" data-title="How UAE Students Are Using AI to Study Smarter">
+            <a href="article.html?id=ai-students" class="article-card__image">
+              <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&auto=format&fit=crop&q=80" alt="AI interface" />
+            </a>
+            <div class="article-card__body">
+              <div class="article-meta"><span>AI</span><span>5 min read</span><span>May 2026</span></div>
+              <h3><a href="article.html?id=ai-students">How UAE Students Are Using AI to Study Smarter</a></h3>
+              <p>From revision planning to research support, AI is changing how students learn, create, and manage university life.</p>
+              <a class="read-link" href="article.html?id=ai-students">Read article →</a>
+            </div>
+          </article>
+
+          <article class="article-card scroll-reveal" data-category="Cybersecurity" data-title="What It Is Really Like Studying Cybersecurity in the UAE">
+            <a href="article.html?id=cyber-uae" class="article-card__image">
+              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=900&auto=format&fit=crop&q=80" alt="Cybersecurity screens" />
+            </a>
+            <div class="article-card__body">
+              <div class="article-meta"><span>Cybersecurity</span><span>6 min read</span><span>May 2026</span></div>
+              <h3><a href="article.html?id=cyber-uae">What It Is Really Like Studying Cybersecurity in the UAE</a></h3>
+              <p>A student perspective on labs, pressure, curiosity, digital forensics, and finding your direction in tech.</p>
+              <a class="read-link" href="article.html?id=cyber-uae">Read article →</a>
+            </div>
+          </article>
+
+          <article class="article-card scroll-reveal" data-category="Student Life" data-title="How to Build Confidence as a University Student">
+            <a href="article.html?id=confidence" class="article-card__image">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&auto=format&fit=crop&q=80" alt="Students working together" />
+            </a>
+            <div class="article-card__body">
+              <div class="article-meta"><span>Student Life</span><span>4 min read</span><span>May 2026</span></div>
+              <h3><a href="article.html?id=confidence">How to Build Confidence as a University Student</a></h3>
+              <p>Confidence is not always loud. Sometimes it starts with showing up, asking questions, and trying again.</p>
+              <a class="read-link" href="article.html?id=confidence">Read article →</a>
+            </div>
+          </article>
+
+          <article class="article-card scroll-reveal" data-category="Career" data-title="The Internship Skills No One Talks About">
+            <a href="article.html?id=internship" class="article-card__image">
+              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&auto=format&fit=crop&q=80" alt="Team discussion" />
+            </a>
+            <div class="article-card__body">
+              <div class="article-meta"><span>Career</span><span>5 min read</span><span>May 2026</span></div>
+              <h3><a href="article.html?id=internship">The Internship Skills No One Talks About</a></h3>
+              <p>Communication, ownership, patience, and problem-solving often matter more than just knowing the tools.</p>
+              <a class="read-link" href="article.html?id=internship">Read article →</a>
+            </div>
+          </article>
+
+          <article class="article-card scroll-reveal" data-category="Digital Culture" data-title="Why Everyone Wants a Personal Brand Now">
+            <a href="article.html?id=personal-brand" class="article-card__image">
+              <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=900&auto=format&fit=crop&q=80" alt="Laptop workspace" />
+            </a>
+            <div class="article-card__body">
+              <div class="article-meta"><span>Digital Culture</span><span>4 min read</span><span>May 2026</span></div>
+              <h3><a href="article.html?id=personal-brand">Why Everyone Wants a Personal Brand Now</a></h3>
+              <p>Online identity has become a portfolio, a network, and sometimes even a career opportunity.</p>
+              <a class="read-link" href="article.html?id=personal-brand">Read article →</a>
+            </div>
+          </article>
+
+          <article class="article-card scroll-reveal" data-category="Wellbeing" data-title="The Science of Happiness for Busy Students">
+            <a href="article.html?id=happiness" class="article-card__image">
+              <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=900&auto=format&fit=crop&q=80" alt="Journal and coffee" />
+            </a>
+            <div class="article-card__body">
+              <div class="article-meta"><span>Wellbeing</span><span>5 min read</span><span>May 2026</span></div>
+              <h3><a href="article.html?id=happiness">The Science of Happiness for Busy Students</a></h3>
+              <p>Small routines, meaningful connections, and realistic expectations can change the way students experience university.</p>
+              <a class="read-link" href="article.html?id=happiness">Read article →</a>
+            </div>
+          </article>
+        </div>
+        <p class="no-results" id="noResults">No articles found. Try another keyword or category.</p>
+      </div>
+    </section>
   </main>
+
   <footer class="footer">
-   <div class="container">
-    <p>
-     © VoicesHub. Built for community publishing.
-    </p>
-   </div>
+    <div class="container footer__grid">
+      <div>
+        <a class="footer__logo" href="index.html"><span>Voices</span>Hub</a>
+        <p>A modern publishing space for writers, students, and creators with ideas worth sharing.</p>
+      </div>
+
+      <div>
+        <h3>Explore</h3>
+        <a href="articles.html">Articles</a>
+        <a href="authors.html">Writers</a>
+        <a href="write.html">Submit Article</a>
+        <a href="about.html">About</a>
+      </div>
+
+      <div>
+        <h3>Categories</h3>
+        <a href="articles.html?category=AI">Artificial Intelligence</a>
+        <a href="articles.html?category=Cybersecurity">Cybersecurity</a>
+        <a href="articles.html?category=Student Life">Student Life</a>
+        <a href="articles.html?category=Career">Career</a>
+      </div>
+
+      <div>
+        <h3>Newsletter</h3>
+        <form class="footer__form" id="newsletterForm">
+          <input id="newsletterEmail" type="email" placeholder="Your email" required />
+          <button type="submit">Join</button>
+        </form>
+        <p class="tiny" id="newsletterMsg"></p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2026 VoicesHub. Built by Naba Imran.</p>
+    </div>
   </footer>
-  <script src="script.js">
-  </script>
- </body>
+  <script src="script.js"></script>
+</body>
 </html>

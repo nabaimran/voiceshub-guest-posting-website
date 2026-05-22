@@ -1,94 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Article — VoicesHub
-  </title>
-  <link href="https://fonts.googleapis.com" rel="preconnect"/>
-  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet"/>
- </head>
- <body>
+<head>
+  <title>Article — VoicesHub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VoicesHub is a modern guest-posting platform for students, writers, and creators sharing ideas on AI, cybersecurity, student life, culture, careers, and digital growth." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
   <nav class="nav" id="mainNav">
-   <div class="nav__inner">
-    <a class="nav__logo" href="index.html">
-     <span>
-      V
-     </span>
-     oicesHub
-    </a>
-    <ul class="nav__links">
-     <li>
-      <a class="nav__link" href="index.html">
-       Home
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="articles.html">
-       Articles
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="authors.html">
-       Authors
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="write.html">
-       Write
-      </a>
-     </li>
-     <li>
-      <a class="nav__link" href="dashboard.html">
-       Dashboard
-      </a>
-     </li>
-     <li>
-      <button class="theme-toggle" id="themeToggle">
-       ☾
-      </button>
-     </li>
-    </ul>
-    <button class="nav__burger" id="burgerBtn">
-     <span>
-     </span>
-     <span>
-     </span>
-     <span>
-     </span>
-    </button>
-   </div>
-   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">
-     Home
-    </a>
-    <a href="articles.html">
-     Articles
-    </a>
-    <a href="authors.html">
-     Authors
-    </a>
-    <a href="write.html">
-     Write
-    </a>
-    <a href="dashboard.html">
-     Dashboard
-    </a>
-   </div>
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html"><span>Voices</span>Hub</a>
+
+      <ul class="nav__links">
+        <li><a class="nav__link " href="index.html">Home</a></li>
+        <li><a class="nav__link nav__link--active" href="articles.html">Articles</a></li>
+        <li><a class="nav__link " href="authors.html">Writers</a></li>
+        <li><a class="nav__link " href="write.html">Write for Us</a></li>
+        <li><a class="nav__link " href="about.html">About</a></li>
+        <li><a class="nav__link nav__link--cta" href="dashboard.html">Dashboard</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+        <button class="nav__burger" id="burgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+          <span class="nav__burger-line"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__mobile" id="mobileMenu">
+      <ul class="nav__mobile-links">
+        <li><a class="nav__mobile-link" href="index.html">Home</a></li>
+        <li><a class="nav__mobile-link" href="articles.html">Articles</a></li>
+        <li><a class="nav__mobile-link" href="authors.html">Writers</a></li>
+        <li><a class="nav__mobile-link" href="write.html">Write for Us</a></li>
+        <li><a class="nav__mobile-link" href="about.html">About</a></li>
+        <li><a class="nav__mobile-link nav__mobile-link--cta" href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </div>
   </nav>
-  <main id="articlePage">
+
+  <main class="article-page">
+    <article class="container article-layout">
+      <header class="article-header">
+        <div class="article-meta"><span id="articleCategory">AI</span><span id="articleReadTime">5 min read</span><span>May 2026</span></div>
+        <h1 id="articleTitle">How UAE Students Are Using AI to Study Smarter</h1>
+        <p id="articleExcerpt">AI is becoming part of everyday student life, from planning essays to supporting research and revision.</p>
+        <div class="article-author-line">
+          <img id="articleAuthorImage" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop&q=80" alt="Author" />
+          <div><strong id="articleAuthor">Naba Imran</strong><span>VoicesHub Contributor</span></div>
+        </div>
+      </header>
+
+      <img class="article-cover" id="articleImage" src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1400&auto=format&fit=crop&q=80" alt="Article cover" />
+
+      <div class="article-body" id="articleBody">
+        <p>AI is no longer just a future concept discussed in lectures. For many students, it has become part of how they organise ideas, revise difficult topics, and build confidence with academic work.</p>
+        <h2>AI as a study partner</h2>
+        <p>Used properly, AI can help students break down complicated concepts, generate revision questions, plan outlines, and compare different perspectives. The value is not in copying answers, but in using tools to think more clearly.</p>
+        <h2>The responsible way to use it</h2>
+        <p>Students still need to fact-check, reference properly, and write in their own voice. The strongest students are not replacing effort with AI. They are using AI to improve structure, creativity, and understanding.</p>
+        <h2>What comes next</h2>
+        <p>As universities adapt, students who learn ethical and practical AI skills will have an advantage in both academic and professional settings.</p>
+      </div>
+
+      <section class="comments-box">
+        <h2>Reader Comments</h2>
+        <form id="commentForm" class="comment-form">
+          <input id="commentName" type="text" placeholder="Your name" required />
+          <textarea id="commentText" rows="4" placeholder="Share your thoughts..." required></textarea>
+          <button class="btn btn--primary" type="submit">Post Comment</button>
+        </form>
+        <div id="commentList" class="comment-list"></div>
+      </section>
+    </article>
   </main>
+
   <footer class="footer">
-   <div class="container">
-    <p>
-     © VoicesHub.
-    </p>
-   </div>
+    <div class="container footer__grid">
+      <div>
+        <a class="footer__logo" href="index.html"><span>Voices</span>Hub</a>
+        <p>A modern publishing space for writers, students, and creators with ideas worth sharing.</p>
+      </div>
+
+      <div>
+        <h3>Explore</h3>
+        <a href="articles.html">Articles</a>
+        <a href="authors.html">Writers</a>
+        <a href="write.html">Submit Article</a>
+        <a href="about.html">About</a>
+      </div>
+
+      <div>
+        <h3>Categories</h3>
+        <a href="articles.html?category=AI">Artificial Intelligence</a>
+        <a href="articles.html?category=Cybersecurity">Cybersecurity</a>
+        <a href="articles.html?category=Student Life">Student Life</a>
+        <a href="articles.html?category=Career">Career</a>
+      </div>
+
+      <div>
+        <h3>Newsletter</h3>
+        <form class="footer__form" id="newsletterForm">
+          <input id="newsletterEmail" type="email" placeholder="Your email" required />
+          <button type="submit">Join</button>
+        </form>
+        <p class="tiny" id="newsletterMsg"></p>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2026 VoicesHub. Built by Naba Imran.</p>
+    </div>
   </footer>
-  <script src="script.js">
-  </script>
- </body>
+  <script src="script.js"></script>
+</body>
 </html>
