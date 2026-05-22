@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="VoicesHub is a multi-author blogging platform where ideas become stories and every voice finds its audience." name="description"/>
+  <title>
+   VoicesHub — Where Ideas Become Stories
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet">
+  </link>
+ </head>
+ <body>
+  <nav class="nav" id="mainNav">
+   <div class="nav__inner">
+    <a class="nav__logo" href="index.html">
+     <span>
+      V
+     </span>
+     oicesHub
+    </a>
+    <ul class="nav__links">
+     <li>
+      <a class="nav__link active" href="index.html">
+       Home
+      </a>
+     </li>
+     <li>
+      <a class="nav__link" href="articles.html">
+       Articles
+      </a>
+     </li>
+     <li>
+      <a class="nav__link" href="authors.html">
+       Authors
+      </a>
+     </li>
+     <li>
+      <a class="nav__link" href="write.html">
+       Write
+      </a>
+     </li>
+     <li>
+      <a class="nav__link" href="dashboard.html">
+       Dashboard
+      </a>
+     </li>
+     <li>
+      <button class="theme-toggle" id="themeToggle">
+       ☾
+      </button>
+     </li>
+    </ul>
+    <button aria-expanded="false" aria-label="Toggle menu" class="nav__burger" id="burgerBtn">
+     <span>
+     </span>
+     <span>
+     </span>
+     <span>
+     </span>
+    </button>
+   </div>
+   <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">
+     Home
+    </a>
+    <a href="articles.html">
+     Articles
+    </a>
+    <a href="authors.html">
+     Authors
+    </a>
+    <a href="write.html">
+     Write
+    </a>
+    <a href="dashboard.html">
+     Dashboard
+    </a>
+   </div>
+  </nav>
+  <header class="hero magazine-hero">
+   <div class="hero__bg">
+   </div>
+   <div class="hero__overlay">
+   </div>
+   <div class="hero__content reveal-text">
+    <p class="eyebrow">
+     Community publishing for bold ideas
+    </p>
+    <h1>
+     Where ideas become
+     <em>
+      stories
+     </em>
+     .
+    </h1>
+    <p class="hero__sub">
+     A modern guest-posting platform for tech, AI, cybersecurity, student life and personal growth.
+    </p>
+    <div class="hero__actions">
+     <a class="btn btn--primary" href="write.html">
+      Submit a Story
+     </a>
+     <a class="btn btn--ghost" href="articles.html">
+      Explore Articles
+     </a>
+    </div>
+    <div class="stats-glass">
+     <div>
+      <strong id="statPosts">
+       0
+      </strong>
+      <span>
+       Articles
+      </span>
+     </div>
+     <div>
+      <strong id="statAuthors">
+       0
+      </strong>
+      <span>
+       Authors
+      </span>
+     </div>
+     <div>
+      <strong>
+       6
+      </strong>
+      <span>
+       Categories
+      </span>
+     </div>
+    </div>
+   </div>
+  </header>
+  <section class="search-strip">
+   <div class="container search-row">
+    <input id="homeSearch" placeholder="Search technology, AI, student life..." type="search"/>
+    <a class="btn btn--primary" href="articles.html">
+     Search Library
+    </a>
+   </div>
+  </section>
+  <main>
+   <section class="section">
+    <div class="container section-head split">
+     <div>
+      <p class="eyebrow">
+       Editor's desk
+      </p>
+      <h2>
+       Featured
+       <em>
+        voices
+       </em>
+      </h2>
+     </div>
+     <a class="text-link" href="articles.html">
+      View all →
+     </a>
+    </div>
+    <div class="featured-layout" id="featuredPosts">
+    </div>
+   </section>
+   <section class="section section--tinted">
+    <div class="container section-head">
+     <p class="eyebrow">
+      Browse by topic
+     </p>
+     <h2>
+      Choose your
+      <em>
+       lane
+      </em>
+     </h2>
+    </div>
+    <div class="category-grid">
+     <a class="category-card" href="articles.html?category=Technology">
+      <span>
+       💻
+      </span>
+      <h3>
+       Technology
+      </h3>
+      <p>
+       Tools, trends and digital life.
+      </p>
+     </a>
+     <a class="category-card" href="articles.html?category=AI">
+      <span>
+       🤖
+      </span>
+      <h3>
+       Artificial Intelligence
+      </h3>
+      <p>
+       AI explained with real examples.
+      </p>
+     </a>
+     <a class="category-card" href="articles.html?category=Cybersecurity">
+      <span>
+       🛡️
+      </span>
+      <h3>
+       Cybersecurity
+      </h3>
+      <p>
+       Safety, privacy and digital defence.
+      </p>
+     </a>
+     <a class="category-card" href="articles.html?category=Student Life">
+      <span>
+       🎓
+      </span>
+      <h3>
+       Student Life
+      </h3>
+      <p>
+       Campus stories and study survival.
+      </p>
+     </a>
+     <a class="category-card" href="articles.html?category=Careers">
+      <span>
+       🚀
+      </span>
+      <h3>
+       Careers
+      </h3>
+      <p>
+       Internships, confidence and growth.
+      </p>
+     </a>
+     <a class="category-card" href="articles.html?category=Culture">
+      <span>
+       🌍
+      </span>
+      <h3>
+       Digital Culture
+      </h3>
+      <p>
+       How the internet shapes us.
+      </p>
+     </a>
+    </div>
+   </section>
+   <section class="section">
+    <div class="container two-col">
+     <div class="panel dark-panel scroll-reveal">
+      <p class="eyebrow light">
+       For writers
+      </p>
+      <h2>
+       Build your portfolio without begging for space.
+      </h2>
+      <p>
+       Submit articles, add your bio, track status and get featured as a contributor.
+      </p>
+      <a class="btn btn--ghost" href="write.html">
+       Start Writing
+      </a>
+     </div>
+     <div class="panel scroll-reveal">
+      <p class="eyebrow">
+       For editors
+      </p>
+      <h2>
+       Review before publishing.
+      </h2>
+      <p>
+       Every submission is saved as pending first, so your platform stays clean and credible.
+      </p>
+      <a class="btn btn--outline" href="dashboard.html">
+       Open Dashboard
+      </a>
+     </div>
+    </div>
+   </section>
+   <section class="newsletter section section--dark">
+    <div class="container newsletter__inner">
+     <div>
+      <p class="eyebrow light">
+       Newsletter
+      </p>
+      <h2>
+       Fresh voices, once a week.
+      </h2>
+      <p>
+       No spam. Just the best articles from the community.
+      </p>
+     </div>
+     <form class="newsletter-form" id="newsletterForm">
+      <input id="newsletterEmail" placeholder="Enter your email" type="email"/>
+      <button class="btn btn--primary">
+       Subscribe
+      </button>
+      <small id="newsletterMsg">
+      </small>
+     </form>
+    </div>
+   </section>
+  </main>
+  <footer class="footer">
+   <div class="container footer__grid">
+    <div>
+     <a class="nav__logo footer-logo" href="index.html">
+      <span>
+       V
+      </span>
+      oicesHub
+     </a>
+     <p>
+      Where every voice finds its audience.
+     </p>
+    </div>
+    <div>
+     <h4>
+      Explore
+     </h4>
+     <a href="articles.html">
+      Articles
+     </a>
+     <a href="authors.html">
+      Authors
+     </a>
+     <a href="write.html">
+      Write for us
+     </a>
+    </div>
+    <div>
+     <h4>
+      Platform
+     </h4>
+     <a href="about.html">
+      About
+     </a>
+     <a href="contact.html">
+      Contact
+     </a>
+     <a href="dashboard.html">
+      Dashboard
+     </a>
+    </div>
+   </div>
+  </footer>
+  <script src="script.js">
+  </script>
+ </body>
+</html>

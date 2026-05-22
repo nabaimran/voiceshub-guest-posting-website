@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Articles — VoicesHub
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <nav class="nav" id="mainNav">
+   <div class="nav__inner">
+    <a class="nav__logo" href="index.html">
+     <span>
+      V
+     </span>
+     oicesHub
+    </a>
+    <ul class="nav__links">
+     <li>
+      <a class="nav__link" href="index.html">
+       Home
+      </a>
+     </li>
+     <li>
+      <a class="nav__link active" href="articles.html">
+       Articles
+      </a>
+     </li>
+     <li>
+      <a class="nav__link" href="authors.html">
+       Authors
+      </a>
+     </li>
+     <li>
+      <a class="nav__link" href="write.html">
+       Write
+      </a>
+     </li>
+     <li>
+      <a class="nav__link" href="dashboard.html">
+       Dashboard
+      </a>
+     </li>
+     <li>
+      <button class="theme-toggle" id="themeToggle">
+       ☾
+      </button>
+     </li>
+    </ul>
+    <button class="nav__burger" id="burgerBtn">
+     <span>
+     </span>
+     <span>
+     </span>
+     <span>
+     </span>
+    </button>
+   </div>
+   <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">
+     Home
+    </a>
+    <a href="articles.html">
+     Articles
+    </a>
+    <a href="authors.html">
+     Authors
+    </a>
+    <a href="write.html">
+     Write
+    </a>
+    <a href="dashboard.html">
+     Dashboard
+    </a>
+   </div>
+  </nav>
+  <header class="page-hero article-hero">
+   <div>
+    <p class="eyebrow">
+     Article library
+    </p>
+    <h1>
+     Read what the community is
+     <em>
+      thinking
+     </em>
+     .
+    </h1>
+    <p>
+     Search, filter and discover stories across technology, AI, cybersecurity, student life and more.
+    </p>
+   </div>
+  </header>
+  <section class="filter-bar">
+   <div class="container filter-wrap">
+    <input id="articleSearch" placeholder="Search articles..." type="search"/>
+    <select id="categoryFilter">
+     <option value="All">
+      All categories
+     </option>
+     <option>
+      Technology
+     </option>
+     <option>
+      AI
+     </option>
+     <option>
+      Cybersecurity
+     </option>
+     <option>
+      Student Life
+     </option>
+     <option>
+      Careers
+     </option>
+     <option>
+      Culture
+     </option>
+    </select>
+    <select id="sortFilter">
+     <option value="newest">
+      Newest first
+     </option>
+     <option value="views">
+      Most viewed
+     </option>
+     <option value="az">
+      A-Z
+     </option>
+    </select>
+   </div>
+  </section>
+  <main class="section">
+   <div class="container">
+    <div class="articles-grid" id="articlesGrid">
+    </div>
+    <p class="empty-state" id="emptyState">
+     No articles found.
+    </p>
+   </div>
+  </main>
+  <footer class="footer">
+   <div class="container">
+    <p>
+     © VoicesHub. Built for community publishing.
+    </p>
+   </div>
+  </footer>
+  <script src="script.js">
+  </script>
+ </body>
+</html>

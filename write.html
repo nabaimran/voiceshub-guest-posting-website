@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Write For Us — VoicesHub
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <nav class="nav" id="mainNav">
+   <div class="nav__inner">
+    <a class="nav__logo" href="index.html">
+     <span>
+      V
+     </span>
+     oicesHub
+    </a>
+    <ul class="nav__links">
+     <li>
+      <a class="nav__link" href="index.html">
+       Home
+      </a>
+     </li>
+     <li>
+      <a class="nav__link" href="articles.html">
+       Articles
+      </a>
+     </li>
+     <li>
+      <a class="nav__link" href="authors.html">
+       Authors
+      </a>
+     </li>
+     <li>
+      <a class="nav__link active" href="write.html">
+       Write
+      </a>
+     </li>
+     <li>
+      <a class="nav__link" href="dashboard.html">
+       Dashboard
+      </a>
+     </li>
+     <li>
+      <button class="theme-toggle" id="themeToggle">
+       ☾
+      </button>
+     </li>
+    </ul>
+    <button class="nav__burger" id="burgerBtn">
+     <span>
+     </span>
+     <span>
+     </span>
+     <span>
+     </span>
+    </button>
+   </div>
+   <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">
+     Home
+    </a>
+    <a href="articles.html">
+     Articles
+    </a>
+    <a href="authors.html">
+     Authors
+    </a>
+    <a href="write.html">
+     Write
+    </a>
+    <a href="dashboard.html">
+     Dashboard
+    </a>
+   </div>
+  </nav>
+  <header class="page-hero write-hero">
+   <div>
+    <p class="eyebrow">
+     Write for us
+    </p>
+    <h1>
+     Submit your
+     <em>
+      guest post
+     </em>
+     .
+    </h1>
+    <p>
+     Your story is saved for editorial review before publishing.
+    </p>
+   </div>
+  </header>
+  <main class="section">
+   <div class="container write-grid">
+    <aside class="guidelines panel">
+     <p class="eyebrow">
+      Guidelines
+     </p>
+     <h2>
+      Before you submit
+     </h2>
+     <ul class="check-list">
+      <li>
+       Original content only
+      </li>
+      <li>
+       600–1500 words recommended
+      </li>
+      <li>
+       Use clear headings
+      </li>
+      <li>
+       No harmful, hateful or plagiarised content
+      </li>
+      <li>
+       Add a useful author bio
+      </li>
+     </ul>
+    </aside>
+    <form class="form-card" id="submitPostForm">
+     <div class="form-row">
+      <label>
+       Author name
+       <input id="authorName" placeholder="Your name" required=""/>
+      </label>
+      <label>
+       Email
+       <input id="authorEmail" placeholder="you@email.com" required="" type="email"/>
+      </label>
+     </div>
+     <label>
+      Author bio
+      <textarea id="authorBio" placeholder="Cybersecurity student, writer, creator..." required="" rows="3"></textarea>
+     </label>
+     <div class="form-row">
+      <label>
+       Article title
+       <input id="postTitle" placeholder="Your article title" required=""/>
+      </label>
+      <label>
+       Category
+       <select id="postCategory" required="">
+        <option value="">
+         Choose category
+        </option>
+        <option>
+         Technology
+        </option>
+        <option>
+         AI
+        </option>
+        <option>
+         Cybersecurity
+        </option>
+        <option>
+         Student Life
+        </option>
+        <option>
+         Careers
+        </option>
+        <option>
+         Culture
+        </option>
+       </select>
+      </label>
+     </div>
+     <label>
+      Featured image URL
+      <input id="postImage" placeholder="https://images.unsplash.com/..."/>
+     </label>
+     <label>
+      Excerpt
+      <textarea id="postExcerpt" placeholder="Short summary for article cards" required="" rows="3"></textarea>
+     </label>
+     <label>
+      Article content
+      <textarea id="postContent" placeholder="Write your full article here..." required="" rows="12"></textarea>
+     </label>
+     <button class="btn btn--primary" type="submit">
+      Submit for Review
+     </button>
+     <p class="success-msg" id="submitMsg">
+     </p>
+    </form>
+   </div>
+  </main>
+  <footer class="footer">
+   <div class="container">
+    <p>
+     © VoicesHub. Your voice belongs here.
+    </p>
+   </div>
+  </footer>
+  <script src="script.js">
+  </script>
+ </body>
+</html>
